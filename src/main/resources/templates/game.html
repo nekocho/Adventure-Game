@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>The Illusionist's Gambit - Game</title>
+    <link rel="stylesheet" href="/main.css" />
+    <script src="script.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="player-stats">
+        <p th:text="'HP: ' + ${hp}" class="stats"></p>
+        <p th:text="'Coin: ' + ${coin}" class="stats"></p>
+        <p th:text="'Weapon: ' + ${weapon}" class="stats"></p>
+    </div>
+
+    <div class="typewriter-container">
+    <h1>The Illusionist's Gambit</h1>
+    </div>
+
+    <div class="text-area">
+        <div class="typewriter hidden" th:text="${mainTextArea}"></div>
+    </div>
+
+    <div class="choice-buttons" th:each="choice, choiceStat : ${choices}">
+        <form method="post" action="/choice">
+            <button type="submit" name="choice" th:value="${choiceIdentifiers[choiceStat.index]}" th:text="${choice}">
+                <span th:text="${choiceIdentifiers[choiceStat.index]}"></span>
+            </button>
+        </form>
+    </div>
+
+
+
+
+</div>
+</body>
+</html>
