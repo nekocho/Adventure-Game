@@ -22,10 +22,11 @@
         <div class="typewriter hidden" th:text="${mainTextArea}"></div>
     </div>
 
-    <div class="choice-buttons" th:each="choice, choiceStat : ${choices}">
+    <div th:each="choice, choiceStat : ${choices}">
         <form method="post" action="/choice">
-            <button type="submit" name="choice" th:value="${choiceIdentifiers[choiceStat.index]}" th:text="${choice}">
-                <span th:text="${choiceIdentifiers[choiceStat.index]}"></span>
+            <input type="hidden" name="index" th:value="${choiceStat.index}" /> <!-- Adding a hidden input field to pass the index value -->
+            <button type="submit" name="choice" th:value="${choices[choiceStat.index]}" th:text="${choice}">
+                <span th:text="${choices[choiceStat.index]}"></span>
             </button>
         </form>
     </div>

@@ -10,7 +10,7 @@ public class Story {
     // Get player stats
     private Player player;
 
-    // Access Set up mainText value for GameController
+    // Access Set up mainText value
     private String mainText;
 
     // Display choices as a list
@@ -42,70 +42,23 @@ public class Story {
         return choices;
     }
 
-    // Mapping choices to text
-    private static final Map<String, String> choiceTextMap = new HashMap<>();
-    private static final List<String> choiceIdentifiers = new ArrayList<>();
-
-    static {
-        // Initialize the map with the mappings
-        choiceTextMap.put("talkToBaker", "Talk to the baker");
-        choiceTextMap.put("lookAroundOakridge", "Look around");
-        // Add more choice mappings as needed
-
-        // Initialize the list of choice identifiers
-        choiceIdentifiers.addAll(choiceTextMap.keySet());
-    }
-    public String getChoiceText(String choiceId) {
-        // Get the user-friendly text corresponding to the choiceId from the map
-        return choiceTextMap.getOrDefault(choiceId, "Unknown choice");
-    }
-    public List<String> getCurrentChoiceIdentifiers() {
-        return choiceIdentifiers;
-    }
-
+    // Method to map choices to methods
     public void selectPosition(String nextPosition) {
-        // Implement story progression logic based on the nextPosition
-        // You can set the main text and choices accordingly
-            switch (nextPosition) {
-                case "enterOakridge":
-                    System.out.println("Enter Oakridge");
-                    System.out.println(getChoiceText("talkToBaker"));
-                    System.out.println(nextPosition);
-                    System.out.println(choiceTextMap);
-                    setMainText("It's a bright sunny day when you enter Oakridge, a small humble village.  \nThe smell of fresh bread fills the air as you walk past the baker. \nLooking around you notice that everyone looks really tense... \n\n What do you do?");
-                    setChoices(Arrays.asList("Talk to the Baker", "Look around"));
-                    break;
-                case "talkToBaker":
-                    System.out.println(nextPosition);
-                    System.out.println("talk to baker");
-                    setMainText("You approach the baker and he looks up. You notice a Tavern next door. You ask him why everyone is so tense, and he responds: \n'Someone's been causing trouble, people going missing... got everyone scared' \n\n What do you do?");
-                    setChoices(Arrays.asList("Thank him and leave", "Go to the Tavern", "Attack Baker"));
-                    break;
-                case "lookAroundOakridge":
-                    System.out.println("Look Around");
-                    setMainText("You see a few people buying bread from the baker, next to the bakery is a Tavern. \nNothing else really stands out.");
-                    setChoices(Arrays.asList("Leave", "", "", ""));
-                    break;
-                // Add more cases for other story progression points
-            }
+        switch (nextPosition) {
+            case "enterOakridge", "Leave":
+                enterOakridge();
+                break;
+            case "Talk to the Baker":
+                talkToBaker();
+                break;
+            case "Attack Baker":
+                attackBaker();
+                break;
+            case "Look Around Oakridge":
+                lookAroundOakridge();
+                break;
+        }
     }
-
-//}
-//    public void selectPosition(String nextPosition) {
-//        switch (nextPosition) {
-//            case "enterOakridge", "Leave":
-//                enterOakridge();
-//                break;
-//            case "Talk to Baker":
-//                talkToBaker();
-//                break;
-//            case "Attack Baker":
-//                attackBaker();
-//                break;
-//            case "Look Around Oakridge":
-//                lookAroundOakridge();
-//                break;
-
             //TO FIX
 //            case "enterTavern":
 //                enterTavern();
@@ -144,33 +97,29 @@ public class Story {
 //        }
 //
 //    }
-//
-//    public void enterOakridge() {
-//        setMainText("It's a bright sunny day when you enter Oakridge, a small humble village.  \nThe smell of fresh bread fills the air as you walk past the baker. \nLooking around you notice that everyone looks really tense... \n\n What do you do?");
-//        setChoices(Arrays.asList("Talk to the Baker", "Look Around Oakridge", "", ""));
-//        System.out.println(getCurrentChoices());
-//        System.out.println(getChoiceText("talkToBaker"));
-//    }
-//
-//    public void talkToBaker() {
-//        System.out.println("talkToBaker");
-//        setMainText("You approach the baker and he looks up. You notice a Tavern next door. You ask him why everyone is so tense, and he responds: \n'Someone's been causing trouble, people going missing... got everyone scared' \n\n What do you do?");
-//        setChoices(Arrays.asList("Thank him and leave", "Go to the Tavern", "Attack Baker", ""));
-//        System.out.println(getCurrentChoices());
-//    }
-//
-//    public void attackBaker() {
-//        setMainText("As you draw your weapon, a guard nearby attacks you. \n\n(You take 3 damage)");
-//        player.hp = player.hp - 3; // Reduce player health
-//        setChoices(Arrays.asList("Leave", "", "", ""));
-//
-//    }
-//
-//    public void lookAroundOakridge() {
-//        System.out.println("LookAround");
-//        setMainText("You see a few people buying bread from the baker, next to the bakery is a Tavern. \nNothing else really stands out.");
-//        setChoices(Arrays.asList("Leave", "", "", ""));
-//    }
+
+    public void enterOakridge() {
+        setMainText("It's a bright sunny day when you enter Oakridge, a small humble village.  \nThe smell of fresh bread fills the air as you walk past the baker. \nLooking around you notice that everyone looks really tense... \n\n What do you do?");
+        setChoices(Arrays.asList("Talk to the Baker", "Look Around Oakridge", "", ""));
+    }
+
+    public void talkToBaker() {
+        setMainText("You approach the baker and he looks up. You notice a Tavern next door. You ask him why everyone is so tense, and he responds: \n'Someone's been causing trouble, people going missing... got everyone scared' \n\n What do you do?");
+        setChoices(Arrays.asList("Thank him and leave", "Go to the Tavern", "Attack Baker", ""));
+    }
+
+    public void attackBaker() {
+        setMainText("As you draw your weapon, a guard nearby attacks you. \n\n(You take 3 damage)");
+        player.hp = player.hp - 3; // Reduce player health
+        setChoices(Arrays.asList("Leave", "", "", ""));
+
+    }
+
+    public void lookAroundOakridge() {
+        System.out.println("LookAround");
+        setMainText("You see a few people buying bread from the baker, next to the bakery is a Tavern. \nNothing else really stands out.");
+        setChoices(Arrays.asList("Leave", "", "", ""));
+    }
 
     //TO FIX
 

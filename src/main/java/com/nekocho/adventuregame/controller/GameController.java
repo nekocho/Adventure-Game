@@ -31,7 +31,6 @@ public class GameController {
         story.selectPosition("enterOakridge"); // Start the story
         model.addAttribute("mainTextArea", story.getMainText());
         model.addAttribute("choices", story.getCurrentChoices());
-        model.addAttribute("choiceIdentifiers", story.getCurrentChoiceIdentifiers());
         model.addAttribute("hp", player.getHp());
         model.addAttribute("coin", player.getCoin());
         model.addAttribute("weapon", player.getCurrentWeapon().getName());
@@ -41,13 +40,13 @@ public class GameController {
 
     @PostMapping("/choice")
     public String handleChoice(@RequestParam("choice") String choice, Model model) {
-        System.out.println("Received choice: " + choice);
+
         // Handle user choice and update the story
         story.selectPosition(choice);
+
         // Update UI data based on story progression
         model.addAttribute("mainTextArea", story.getMainText());
         model.addAttribute("choices", story.getCurrentChoices());
-        model.addAttribute("choiceIdentifiers", story.getCurrentChoiceIdentifiers());
         model.addAttribute("hp", player.getHp());
         model.addAttribute("coin", player.getCoin());
         model.addAttribute("weapon", player.getCurrentWeapon().getName());
