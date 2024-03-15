@@ -2,6 +2,7 @@ package com.nekocho.adventuregame.model;
 
 import com.nekocho.adventuregame.model.weapons.Weapon;
 
+import com.nekocho.adventuregame.model.weapons.WeaponKnife;
 import org.springframework.stereotype.Component;
 
 
@@ -19,7 +20,7 @@ public class Player{
         // Initialize default values
         this.hp = 10; // Default HP
         this.coin = 100; // Default coins
-        this.currentWeapon = null; // Default weapon (null or any default weapon you want)
+        this.currentWeapon = new WeaponKnife(); // Default weapon (null or any default weapon you want)
     }
 
     // Constructor with parameters

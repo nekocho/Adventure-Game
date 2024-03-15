@@ -45,7 +45,7 @@ public class Story {
     // Method to map choices to methods
     public void selectPosition(String nextPosition) {
         switch (nextPosition) {
-            case "enterOakridge", "Leave":
+            case "enterOakridge", "Leave", "Restart", "Thank him and leave":
                 enterOakridge();
                 break;
             case "Talk to the Baker":
@@ -99,26 +99,48 @@ public class Story {
 //    }
 
     public void enterOakridge() {
+        // Check if player is still alive
+        if (player.getHp() <= 0) {
+            player.setHp(10);
+            // You can implement logic here for what happens when the player is defeated
+            // For example, you might trigger a game over screen or reset the game.
+        }
         setMainText("It's a bright sunny day when you enter Oakridge, a small humble village.  \nThe smell of fresh bread fills the air as you walk past the baker. \nLooking around you notice that everyone looks really tense... \n\n What do you do?");
-        setChoices(Arrays.asList("Talk to the Baker", "Look Around Oakridge", "", ""));
+        setChoices(Arrays.asList("Talk to the Baker", "Look Around Oakridge"));
     }
 
     public void talkToBaker() {
         setMainText("You approach the baker and he looks up. You notice a Tavern next door. You ask him why everyone is so tense, and he responds: \n'Someone's been causing trouble, people going missing... got everyone scared' \n\n What do you do?");
-        setChoices(Arrays.asList("Thank him and leave", "Go to the Tavern", "Attack Baker", ""));
+        setChoices(Arrays.asList("Thank him and leave", "Go to the Tavern", "Attack Baker"));
     }
 
     public void attackBaker() {
         setMainText("As you draw your weapon, a guard nearby attacks you. \n\n(You take 3 damage)");
-        player.hp = player.hp - 3; // Reduce player health
-        setChoices(Arrays.asList("Leave", "", "", ""));
+        // Reduce player health
+        int currentHealth = player.getHp();  // Log current health
+        player.setHp(currentHealth - 3);     // Reduce health by 3
+        int newHealth = player.getHp();      // Log new health
+
+        System.out.println("Current health: " + currentHealth); // Debugging log
+        System.out.println("New health: " + newHealth);         // Debugging log
+
+        // Check if player is still alive
+        if (player.getHp() <= 0) {
+            setMainText("You have been defeated...");
+            setChoices(Collections.singletonList("Restart"));
+            // You can implement logic here for what happens when the player is defeated
+            // For example, you might trigger a game over screen or reset the game.
+        } else {
+            // Player is still alive, continue with the story
+            setChoices(Arrays.asList("Leave"));
+        }
 
     }
 
     public void lookAroundOakridge() {
         System.out.println("LookAround");
         setMainText("You see a few people buying bread from the baker, next to the bakery is a Tavern. \nNothing else really stands out.");
-        setChoices(Arrays.asList("Leave", "", "", ""));
+        setChoices(Arrays.asList("Leave"));
     }
 
     //TO FIX

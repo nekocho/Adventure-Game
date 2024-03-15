@@ -2,29 +2,33 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>The Illusionist's Gambit - Game</title>
+    <title>Tavern Tales</title>
     <link rel="stylesheet" href="/main.css" />
     <script src="script.js"></script>
 </head>
 <body>
 <div class="container">
     <div class="player-stats">
-        <p th:text="'HP: ' + ${hp}" class="stats"></p>
-        <p th:text="'Coin: ' + ${coin}" class="stats"></p>
-        <p th:text="'Weapon: ' + ${weapon}" class="stats"></p>
+        <p th:text="'HP: ' + ${player.hp}" class="stats"></p>
+        <p th:text="'Coin: ' + ${player.coin}" class="stats"></p>
+        <p th:text="'Weapon: ' + ${player.currentWeapon.name}" class="stats"></p>
     </div>
 
     <div class="typewriter-container">
-    <h1>The Illusionist's Gambit</h1>
+    <h1 class="title">Tavern Tales</h1>
+        <p></p>
     </div>
 
     <div class="text-area">
+<!--        Displays Game Over text if player HP falls below 0-->
+        <div th:if="${player.getHp() <= 0}"><h1 class="game-over">GAME OVER</h1></div>
+<!--        Where main game text will be displayed-->
         <div class="typewriter hidden" th:text="${mainTextArea}"></div>
     </div>
 
+<!--    Choice buttons-->
     <div th:each="choice, choiceStat : ${choices}">
         <form method="post" action="/choice">
-            <input type="hidden" name="index" th:value="${choiceStat.index}" /> <!-- Adding a hidden input field to pass the index value -->
             <button type="submit" name="choice" th:value="${choices[choiceStat.index]}" th:text="${choice}">
                 <span th:text="${choices[choiceStat.index]}"></span>
             </button>
