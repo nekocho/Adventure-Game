@@ -132,7 +132,7 @@ public class Story {
     }
 
     public void talkToBaker() {
-        setImagePath(null);
+        setImagePath("/images/village-pixel-art.png");
         setMainText("You approach the baker and he looks up. You notice a Tavern next door. You ask him why everyone is so tense, and he responds: \n'Someone's been causing trouble, people going missing... got everyone scared' \n\nWhat do you do?");
         setChoices(Arrays.asList("Thank him and leave", "Go to the Tavern", "Attack Baker"));
     }
@@ -163,7 +163,7 @@ public class Story {
 
     public void lookAroundOakridge() {
         setImagePath(null);
-        System.out.println("LookAround");
+        setImagePath("/images/village-pixel-art.png");
         setMainText("You see a few people buying bread from the baker, next to the bakery is a Tavern. \nNothing else really stands out.");
         setChoices(Arrays.asList("Leave"));
     }
