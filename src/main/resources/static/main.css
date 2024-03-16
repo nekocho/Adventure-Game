@@ -95,21 +95,18 @@ body {
     padding: 20px;
 }
 
-.game-container{
+.game-container {
+    justify-content: center;
     align-items: center;
     display: flex;
     flex-direction: column;
     width: 800px;
-    height: 200px;
+    height: 250px;
     padding: 20px;
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: center; /* Center the background image */
     position: relative; /* Ensure proper positioning of child elements */
-}
-.scenario-image {
-    width: 600px;
-    height: 200px;
-    padding: 20px;
 }
 
 .game-over {

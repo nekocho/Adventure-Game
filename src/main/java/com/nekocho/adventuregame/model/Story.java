@@ -78,12 +78,13 @@ public class Story {
             case "Look Around Oakridge":
                 lookAroundOakridge();
                 break;
+            case "Go to the Tavern":
+                enterTavern();
+                break;
         }
     }
             //TO FIX
-//            case "enterTavern":
-//                enterTavern();
-//                break;
+
 //            case "talkToBarkeep":
 //                talkToBarkeep();
 //                break;
@@ -132,13 +133,13 @@ public class Story {
     }
 
     public void talkToBaker() {
-        setImagePath("/images/village-pixel-art.png");
+        setImagePath("/images/baker.png");
         setMainText("You approach the baker and he looks up. You notice a Tavern next door. You ask him why everyone is so tense, and he responds: \n'Someone's been causing trouble, people going missing... got everyone scared' \n\nWhat do you do?");
         setChoices(Arrays.asList("Thank him and leave", "Go to the Tavern", "Attack Baker"));
     }
 
     public void attackBaker() {
-        setImagePath(null);
+        setImagePath("/images/guard.png");
         setMainText("As you draw your weapon, a guard nearby attacks you. \n\n(You take 3 damage)");
         // Reduce player health
         int currentHealth = player.getHp();  // Log current health
@@ -150,6 +151,7 @@ public class Story {
 
         // Check if player is still alive
         if (player.getHp() <= 0) {
+            setImagePath("/images/game-over.png");
             setMainText("You have been defeated...");
             setChoices(Collections.singletonList("Restart"));
             // You can implement logic here for what happens when the player is defeated
@@ -162,28 +164,18 @@ public class Story {
     }
 
     public void lookAroundOakridge() {
-        setImagePath(null);
         setImagePath("/images/village-pixel-art.png");
         setMainText("You see a few people buying bread from the baker, next to the bakery is a Tavern. \nNothing else really stands out.");
-        setChoices(Arrays.asList("Leave"));
+        setChoices(Arrays.asList("Leave", "Go to the Tavern"));
+    }
+
+    public void enterTavern() {
+        setImagePath("/images/tavern.png");
+        setMainText("The Tavern is small but friendly, a barkeep is quietly observing you while cleaning a glass at the bar. \nThere are a few tables and chairs around. \n\nWhat do you do?");
+        setChoices(Arrays.asList("Talk to the Barkeep", "Grab a seat at the table", "Leave"));
     }
 
     //TO FIX
-
-//    public void enterTavern() {
-//        ui.mainTextArea.setText("The Tavern is small but friendly, a barkeep is quietly observing you while cleaning a glass at the bar. \nThere are a few tables and chairs around. \n\nWhat do you do?");
-//        ui.choice1.setText("Talk to the Barkeep");
-//        ui.choice2.setText("Grab a seat at the table");
-//        ui.choice3.setText("Leave");
-//        ui.choice4.setText("");
-//
-//        // Sets next positions on button click
-//        game.nextPosition1 = "talkToBarkeep";
-//        game.nextPosition2 = "sitAtTable";
-//        game.nextPosition3 = "enterOakridge";
-//        game.nextPosition4 = "";
-//    }
-//
 //    public void talkToBarkeep() {
 //        ui.mainTextArea.setText("'How's your day going? new here?' \n\nWhat do you do?");
 //        ui.choice1.setText("Ask about the town");
