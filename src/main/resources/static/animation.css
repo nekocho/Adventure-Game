@@ -1,82 +1,3 @@
-@keyframes cursor {
-    0% {
-        opacity: 1;
-    }
-    25% {
-        opacity: 0;
-    }
-    75% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-@keyframes flicker {
-    0% {
-        opacity: 0.57861;
-    }
-    5% {
-        opacity: 0.64769;
-    }
-    10% {
-        opacity: 0.73604;
-    }
-    15% {
-        opacity: 0.90626;
-    }
-    20% {
-        opacity: 0.68128;
-    }
-    25% {
-        opacity: 0.83891;
-    }
-    30% {
-        opacity: 0.65583;
-    }
-    35% {
-        opacity: 0.67807;
-    }
-    40% {
-        opacity: 0.66559;
-    }
-    45% {
-        opacity: 0.84693;
-    }
-    50% {
-        opacity: 0.96019;
-    }
-    55% {
-        opacity: 0.58594;
-    }
-    60% {
-        opacity: 0.60313;
-    }
-    65% {
-        opacity: 0.71988;
-    }
-    70% {
-        opacity: 0.53455;
-    }
-    75% {
-        opacity: 0.67288;
-    }
-    80% {
-        opacity: 0.71428;
-    }
-    85% {
-        opacity: 0.70419;
-    }
-    90% {
-        opacity: 0.7003;
-    }
-    95% {
-        opacity: 0.66108;
-    }
-    100% {
-        opacity: 0.54387;
-    }
-}
 @keyframes textShadow {
     0% {
         text-shadow: 0.4389924193300864px 0 1px rgba(0, 30, 255, 0.5),
@@ -252,11 +173,20 @@
     }
 }
 
-@keyframes marquee {
-    0% {
-        transform: translate(100%, 0);
+/*Animation for typewriter*/
+@keyframes typing {
+    from {
+        width: 0;
     }
-    100% {
-        transform: translate(-100%, 0);
+    to {
+        width: 100%;
+    }
+}
+@keyframes blink-caret {
+    from, to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: green;
     }
 }

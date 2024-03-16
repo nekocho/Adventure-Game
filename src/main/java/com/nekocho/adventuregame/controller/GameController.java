@@ -23,6 +23,7 @@ public class GameController {
     public String index(Model model) {
         // Initialize the game and pass initial data to Thymeleaf
         story.selectPosition("enterOakridge"); // Start the story
+        model.addAttribute("imagePath", story.getImagePath());
         model.addAttribute("mainTextArea", story.getMainText());
         model.addAttribute("choices", story.getCurrentChoices());
         model.addAttribute("player", player);
@@ -36,6 +37,7 @@ public class GameController {
         story.selectPosition(choice);
 
         // Update UI data based on story progression
+        model.addAttribute("imagePath", story.getImagePath());
         model.addAttribute("mainTextArea", story.getMainText());
         model.addAttribute("choices", story.getCurrentChoices());
         model.addAttribute("player", player);

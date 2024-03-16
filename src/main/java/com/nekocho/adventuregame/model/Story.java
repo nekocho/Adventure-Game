@@ -16,11 +16,16 @@ public class Story {
     // Display choices as a list
     private List<String> choices;
 
+    // Get image name from resources/static/image directory
+    private String imagePath;
+
     // Construct the Story with player stats and choices
     public Story(Player player) {
         this.player = player;
         this.choices = new ArrayList<>();
     }
+
+    // SETTERS
 
     // Method to set the main text
     public void setMainText(String mainText) {
@@ -32,6 +37,13 @@ public class Story {
         this.choices = choices;
     }
 
+    // Method to set image path
+    public void setImagePath(String imagePath){
+        this.imagePath = imagePath;
+    }
+
+    // GETTERS
+
     // Method to get the main text
     public String getMainText() {
         return mainText;
@@ -41,6 +53,15 @@ public class Story {
     public List<String> getCurrentChoices() {
         return choices;
     }
+
+    // Method to get image path
+    public String getImagePath() {
+        return imagePath;
+    }
+
+
+
+
 
     // Method to map choices to methods
     public void selectPosition(String nextPosition) {
@@ -105,16 +126,19 @@ public class Story {
             // You can implement logic here for what happens when the player is defeated
             // For example, you might trigger a game over screen or reset the game.
         }
-        setMainText("It's a bright sunny day when you enter Oakridge, a small humble village.  \nThe smell of fresh bread fills the air as you walk past the baker. \nLooking around you notice that everyone looks really tense... \n\n What do you do?");
+        setImagePath("/images/village-pixel-art.png");
+        setMainText("It's a bright sunny day when you enter Oakridge, a small humble village.\nThe smell of fresh bread fills the air as you walk past the baker. \nLooking around you notice that everyone looks really tense... \n\nWhat do you do?");
         setChoices(Arrays.asList("Talk to the Baker", "Look Around Oakridge"));
     }
 
     public void talkToBaker() {
-        setMainText("You approach the baker and he looks up. You notice a Tavern next door. You ask him why everyone is so tense, and he responds: \n'Someone's been causing trouble, people going missing... got everyone scared' \n\n What do you do?");
+        setImagePath(null);
+        setMainText("You approach the baker and he looks up. You notice a Tavern next door. You ask him why everyone is so tense, and he responds: \n'Someone's been causing trouble, people going missing... got everyone scared' \n\nWhat do you do?");
         setChoices(Arrays.asList("Thank him and leave", "Go to the Tavern", "Attack Baker"));
     }
 
     public void attackBaker() {
+        setImagePath(null);
         setMainText("As you draw your weapon, a guard nearby attacks you. \n\n(You take 3 damage)");
         // Reduce player health
         int currentHealth = player.getHp();  // Log current health
@@ -138,6 +162,7 @@ public class Story {
     }
 
     public void lookAroundOakridge() {
+        setImagePath(null);
         System.out.println("LookAround");
         setMainText("You see a few people buying bread from the baker, next to the bakery is a Tavern. \nNothing else really stands out.");
         setChoices(Arrays.asList("Leave"));

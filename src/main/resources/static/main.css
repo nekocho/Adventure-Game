@@ -13,24 +13,51 @@ body {
 }
 
 .title-area{
-    font-size: 30px;
-    width: 800px;
-    height: 300px;
+    margin: 0 auto;
+    width: 700px;
+    height: 600px;
     background: black;
     overflow: hidden;
+    margin-top: 50px;
+    position: relative;
+    text-transform: uppercase;
+    animation: textShadow 4s infinite;
+    text-shadow: 0 0 5px #c8c8c8;
     text-align: center;
-    animation: textShadow, flicker;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.title-area h1 {
+    font-size: 50px;
+    color: white;
+    line-height: 0;
+}
+.start-button {
+    display: block;
+    margin: 20px auto;
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    padding: 15px 30px;
+    font-family: "VT323", monospace;
 }
 
-.text-area {
-    font-size: 15px;
-    width: 800px;
-    height: 300px;
-    background: black;
-    overflow: hidden;
+.choice-wrapper{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
 }
 
-button {
+.choice-container{
+    display: flex;
+    justify-content: center;
+    width: 100%; /* Take up the full width */
+}
+
+.choice-button {
     display: block;
     margin: 20px auto;
     background-color: black;
@@ -42,18 +69,56 @@ button {
     max-width: 300px;
 }
 
+.choice-button:hover {
+    background: deepskyblue;
+    color: black;
+}
+
+.player-stats{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stats{
+    padding: 20px;
+    line-height: 0;
+    font-size: 20px;
+}
+
+.text-area {
+    font-size: 15px;
+    width: 800px;
+    height: auto;
+    background: black;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.game-container{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    height: 200px;
+    padding: 20px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative; /* Ensure proper positioning of child elements */
+}
+.scenario-image {
+    width: 600px;
+    height: 200px;
+    padding: 20px;
+}
+
 .game-over {
     align-content: center;
 }
 
-.start-button {
-    display: block;
-    margin: 20px auto;
-    background-color: black;
-    color: white;
-    font-size: 20px;
-    padding: 15px 30px;
-    font-family: "VT323", monospace;
+.game-title{
+    text-align: center;
+    font-size: 50px;
 }
 
 .typewriterIndex {
@@ -61,14 +126,19 @@ button {
     font-family: "VT323", monospace;
     overflow: hidden;
     letter-spacing: .15em;
-    white-space: pre-wrap;
-    animation: typing 3.5s steps(30, end), blink-caret .5s step-end infinite, textShadow;
+    white-space: nowrap;
+    animation:
+        typingTitle 3.5s steps(30, end),
+        blink-caret .5s step-end infinite,
+        textShadow 5s infinite,
+        flicker 5s infinite;
     animation-fill-mode: forwards;
+    text-align: center; /* Add this line */
 }
 
 .typewriter {
     color: #fff;
-    font-family: "VT323", monospace;
+    font-family: monospace;
     overflow: hidden;
     letter-spacing: .15em;
     white-space: pre-wrap;
@@ -94,6 +164,13 @@ button {
 }
 
 
-
-
-
+@keyframes typingTitle {
+    0% {
+        width: 0;
+        margin: 0 auto; /* Center the text */
+    }
+    100% {
+        width: 100%;
+        margin: 0 auto; /* Reset margin */
+    }
+}
