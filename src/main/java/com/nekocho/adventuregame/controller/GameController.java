@@ -13,6 +13,8 @@ public class GameController {
     private final Story story;
     private final Player player;
 
+    private boolean animationsEnabled;
+
     @Autowired
     public GameController(Story story, Player player) {
         this.story = story;
@@ -20,14 +22,22 @@ public class GameController {
     }
 
     @GetMapping("/start")
-    public String index(Model model) {
+    public String handleStart(@RequestParam(name = "animationsEnabled", required = false) String animationsEnabled, Model model) {
         // Initialize the game and pass initial data to Thymeleaf
         story.selectPosition("enterOakridge"); // Start the story
         model.addAttribute("imagePath", story.getImagePath());
         model.addAttribute("mainTextArea", story.getMainText());
         model.addAttribute("choices", story.getCurrentChoices());
         model.addAttribute("player", player);
-        // Add other necessary attributes
+
+        this.animationsEnabled = "on".equals(animationsEnabled);
+
+        if (this.animationsEnabled) {
+            model.addAttribute("animationsEnabled", true);
+        } else {
+            model.addAttribute("animationsEnabled", false);
+        }
+
         return "game";
     }
 
@@ -41,6 +51,7 @@ public class GameController {
         model.addAttribute("mainTextArea", story.getMainText());
         model.addAttribute("choices", story.getCurrentChoices());
         model.addAttribute("player", player);
+        model.addAttribute("animationsEnabled", this.animationsEnabled);
         return "game";
     }
 }

@@ -7,6 +7,8 @@
     <script src="script.js"></script>
 </head>
 <body>
+<input type="hidden" id="animationsEnabled" th:value="${animationsEnabled}" />
+
 <div class="container">
 
 <!--    Player stats-->
@@ -18,18 +20,11 @@
 
 <!--Title-->
     <h1 class="game-title">Tavern Tales</h1>
-        <p></p>
 
-    <div class="game-container"
+    <div class="game-container" th:if="${imagePath != null}"
          th:style="'background-image: url(' + ${imagePath} + ')'">
     </div>
 
-
-<!--&lt;!&ndash;Game text display area &ndash;&gt;-->
-<!--    <div class="game-container">-->
-<!--        &lt;!&ndash;Display image per scenario&ndash;&gt;-->
-<!--        <img class="scenario-image" th:if="${imagePath != null}" th:src="@{${imagePath}}" alt="Scenario Image">-->
-<!--    </div>-->
         <!--Text-display styling-->
         <div class="text-area">
             <!-- Displays Game Over text if player HP falls below 0-->
@@ -40,7 +35,7 @@
         </div>
 
     <!--Choice button styling-->
-    <div class=".choice-wrapper">
+    <div class="choice-wrapper">
         <div class="choice-container">
             <!--choice button code-->
             <div th:each="choice, choiceStat : ${choices}">

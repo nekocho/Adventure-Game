@@ -9,6 +9,7 @@
     <script src="script.js"></script>
 </head>
 <body>
+<input type="hidden" id="animationsEnabled" th:value="${animationsEnabled}" />
 <!--Body of page placement-->
 <div class="container">
 
@@ -20,9 +21,17 @@
         <!--start button-->
         <form action="/start" method="get">
             <button class="start-button" type="submit">START</button>
+            <p class="toggleQuestion">Would you like to switch on animations?</p>
+            <div class="sr-only">We would recommend leaving animations off for screen readers</div>
+            <input name="animationsEnabled" type="checkbox" id="toggle" class="toggleCheckbox" />
+            <label for="toggle" class='toggleContainer' role="switch">
+                <div>No</div>
+                <div>Yes</div>
+            </label>
         </form>
 
         <!--author text-->
+        <br>
         <p class="typewriterIndex"> A game by NekoCho</p>
     </div>
 </div>
