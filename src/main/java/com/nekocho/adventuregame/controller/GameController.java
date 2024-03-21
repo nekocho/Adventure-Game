@@ -47,17 +47,16 @@ public class GameController {
     public String handleChoice(@RequestParam(name = "choice", required = false) String choice,
                                @RequestParam(name = "userInput", required = false) String userInput,
                                Model model) {
+
+        // Handle user's choice
         if (choice != null) {
-            // Handle user's choice
             story.selectPosition(choice);
         }
+
+        // Handle user input
         if (userInput != null) {
-            // Handle user input
             story.setUserInput(userInput);
         }
-
-        System.out.println(userInput);
-        System.out.println(story.getUserInput());
 
         // Update UI data based on story progression
         model.addAttribute("imagePath", story.getImagePath());
@@ -66,7 +65,9 @@ public class GameController {
         model.addAttribute("player", player);
         model.addAttribute("animationsEnabled", this.animationsEnabled);
         model.addAttribute("userInput", story.getUserInput());
+
         return "game";
     }
+
 
 }

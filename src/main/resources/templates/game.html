@@ -37,19 +37,13 @@
 
     <div class="user-input">
         <form method="post" action="/choice">
-            <input type="text" class="user-field" name="userInput" th:value="${userInput}" alt="Input action here">
+            ><input type="text" class="user-field" name="userInput" th:value="${userInput}" alt="Input action here"autocomplete="off">
             <input type="hidden" name="choice" value="start">
             <input type="submit" style="display: none;">
         </form>
     </div>
 
-        </div>
-
-
-
-
-
-    <!--Choice button styling-->
+<!--    Choice button styling-->
     <div class="choice-wrapper">
         <div class="choice-container">
             <!--choice button code-->
@@ -60,9 +54,10 @@
                     </button>
                 </form>
             </div>
-
         </div>
     </div>
+<!--            text area closing tag-->
+        </div>
 
 </div>
 

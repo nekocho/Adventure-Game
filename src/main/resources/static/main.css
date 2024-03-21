@@ -3,7 +3,7 @@
 body {
     background-color: #111;
     color: white;
-    font-family: "VT323", monospace;;
+    font-family: "VT323", monospace;
     padding: 20px;
 }
 
@@ -200,6 +200,15 @@ body {
     transition: color 0.3s; /* Adding transition */
 }
 
+
+input[type=text]{
+    background-color: black;
+    color: white;
+    border: none;
+    outline: none;
+    font-family: monospace;
+    font-size: 15px;
+}
 
 
 
