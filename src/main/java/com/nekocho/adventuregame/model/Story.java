@@ -19,6 +19,14 @@ public class Story {
     // Get image name from resources/static/image directory
     private String imagePath;
 
+    // Display User input as a List
+    private String userInput;
+
+    // Previous state fields
+    private String previousMainText;
+    private List<String> previousChoices;
+    private String previousImagePath;
+
     // Construct the Story with player stats and choices
     public Story(Player player) {
         this.player = player;
@@ -29,7 +37,14 @@ public class Story {
 
     // Method to set the main text
     public void setMainText(String mainText) {
+        // Save previous state
+        this.previousImagePath = this.imagePath;
+        this.previousMainText = this.mainText;
+        this.previousChoices = this.choices;
+
+        // Set new state
         this.mainText = mainText;
+
     }
 
     // Method to set the choices
@@ -39,8 +54,16 @@ public class Story {
 
     // Method to set image path
     public void setImagePath(String imagePath){
+        System.out.println("Setting image path to: " + imagePath);
+        System.out.println("Previous image path: " + this.previousImagePath);
         this.imagePath = imagePath;
     }
+
+    public void setUserInput(String userInput) {
+        this.userInput = userInput;
+        handleUserInput(userInput);
+    }
+
 
     // GETTERS
 
@@ -59,14 +82,49 @@ public class Story {
         return imagePath;
     }
 
+    public String getUserInput() {
+        return userInput;
+    }
 
 
 
+
+    // Handle user input choices
+    public void handleUserInput(String userInput) {
+        if (userInput != null) {
+            // Tokenize the user input by splitting it into words
+            String[] words = userInput.toLowerCase().split("\\s+"); // Split by whitespace and convert to lowercase
+
+            // Check for keywords in the tokenized input
+            if (containsKeyword(words, "look") && containsKeyword(words, "around") || containsKeyword(words, "area") || containsKeyword(words, "oakridge")) {
+                lookAroundOakridge();
+            } else if (containsKeyword(words, "talk") || (containsKeyword(words, "speak")) && containsKeyword(words, "baker")) {
+                talkToBaker();
+            } else if (containsKeyword(words, "attack") && containsKeyword(words, "baker")) {
+                attackBaker();
+            } else if (containsKeyword(words, "enter") && containsKeyword(words, "tavern")) {
+                enterTavern();
+            } else if (containsKeyword(words, "back") || containsKeyword(words, "return")) {
+                goBack();
+            } else {
+                noScenario();
+            }
+
+        }
+    }
+    private boolean containsKeyword(String[] words, String keyword) {
+        return Arrays.asList(words).contains(keyword);
+    }
 
     // Method to map choices to methods
-    public void selectPosition(String nextPosition) {
+    public String selectPosition(String nextPosition) {
         switch (nextPosition) {
-            case "enterOakridge", "Leave", "Restart", "Thank him and leave":
+            case "Back":
+                goBack();
+                break;
+            case "Restart":
+                return "redirect:/";
+            case "enterOakridge", "Leave", "Thank him and leave":
                 enterOakridge();
                 break;
             case "Talk to the Baker":
@@ -81,7 +139,9 @@ public class Story {
             case "Go to the Tavern":
                 enterTavern();
                 break;
+
         }
+        return nextPosition;
     }
             //TO FIX
 
@@ -120,34 +180,35 @@ public class Story {
 //
 //    }
 
+    public void noScenario() {
+        setMainText("Sorry, I don't know what you mean?");
+        setChoices(Arrays.asList("Back"));
+    }
+
     public void enterOakridge() {
         // Check if player is still alive
         if (player.getHp() <= 0) {
             player.setHp(10);
-            // You can implement logic here for what happens when the player is defeated
-            // For example, you might trigger a game over screen or reset the game.
         }
         setImagePath("/images/village-pixel-art.png");
         setMainText("It's a bright sunny day when you enter Oakridge, a small humble village.\nThe smell of fresh bread fills the air as you walk past the baker. \nLooking around you notice that everyone looks really tense... \n\nWhat do you do?");
-        setChoices(Arrays.asList("Talk to the Baker", "Look Around Oakridge"));
+        setChoices(null);
     }
 
     public void talkToBaker() {
+        System.out.println(this.previousMainText);
         setImagePath("/images/baker.png");
         setMainText("You approach the baker and he looks up. You notice a Tavern next door. You ask him why everyone is so tense, and he responds: \n'Someone's been causing trouble, people going missing... got everyone scared' \n\nWhat do you do?");
         setChoices(Arrays.asList("Thank him and leave", "Go to the Tavern", "Attack Baker"));
     }
 
     public void attackBaker() {
+        System.out.println(this.previousMainText);
         setImagePath("/images/guard.png");
         setMainText("As you draw your weapon, a guard nearby attacks you. \n\n(You take 3 damage)");
         // Reduce player health
         int currentHealth = player.getHp();  // Log current health
         player.setHp(currentHealth - 3);     // Reduce health by 3
-        int newHealth = player.getHp();      // Log new health
-
-        System.out.println("Current health: " + currentHealth); // Debugging log
-        System.out.println("New health: " + newHealth);         // Debugging log
 
         // Check if player is still alive
         if (player.getHp() <= 0) {
@@ -173,6 +234,13 @@ public class Story {
         setImagePath("/images/tavern.png");
         setMainText("The Tavern is small but friendly, a barkeep is quietly observing you while cleaning a glass at the bar. \nThere are a few tables and chairs around. \n\nWhat do you do?");
         setChoices(Arrays.asList("Talk to the Barkeep", "Grab a seat at the table", "Leave"));
+    }
+
+    public void goBack() {
+        this.imagePath = previousImagePath;
+        this.mainText = previousMainText;
+        this.choices = previousChoices;
+
     }
 
     //TO FIX

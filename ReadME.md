@@ -12,6 +12,11 @@ A game project developed using Java, Springboot and Thymeleaf.
 - Build Weapons directory with multiple weapons
 - Fixed bugs mentioned in issues
 - Added images resource folder with images for title and first scenario
+- Back feature
+
+## Current bugs
+
+- Going back a page doesn't change the image but the text and options changes
 
 
 ## Things to add:

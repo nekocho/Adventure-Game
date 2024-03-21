@@ -3,8 +3,20 @@
 body {
     background-color: #111;
     color: white;
-    font-family: "VT323", monospace;;
+    font-family: "VT323", monospace;
     padding: 20px;
+}
+
+/*For screenreaders*/
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
 }
 
 .container {
@@ -12,6 +24,7 @@ body {
     margin: 0 auto;
 }
 
+/*Title page styling*/
 .title-area{
     margin: 0 auto;
     width: 700px;
@@ -29,6 +42,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding: 20px;
 }
 .title-area h1 {
     font-size: 50px;
@@ -45,6 +59,160 @@ body {
     font-family: "VT323", monospace;
 }
 
+/*Animation Toggle styling*/
+.toggleQuestion {
+    color: white;
+    font-size: 20px;
+}
+
+/* Styling for the toggle container */
+.toggleContainer {
+    position: relative;
+    display: grid; /* Using CSS grid for layout */
+    grid-template-columns: repeat(2, 1fr); /* Creating two columns of equal width */
+    width: fit-content; /* Adjusting width to fit content */
+    border: 3px solid #343434; /* Adding border */
+    border-radius: 20px; /* Adding border radius */
+    background: #343434; /* Background color */
+    font-weight: bold; /* Bold text */
+    text-shadow: none; /* Removing text shadow */
+    color: #343434; /* Text color */
+    cursor: pointer; /* Changing cursor to pointer on hover */
+    margin: 0 auto; /* Centering horizontally */
+}
+
+/* Styling for the pseudo-element that represents the toggle switch */
+.toggleContainer::before {
+    content: ''; /* Adding content to pseudo-element */
+    position: absolute; /* Positioning the pseudo-element absolutely */
+    width: 50%; /* Setting initial width to 50% */
+    height: 100%; /* Setting height to match container */
+    left: 0%; /* Initial position */
+    border-radius:20px; /* Adding border radius */
+    background: #33add1; /* Background color */
+    transition: all 0.3s; /* Adding transition for smooth animation */
+}
+
+/* Styling for the toggle switch when checked */
+.toggleCheckbox:checked + .toggleContainer::before {
+    left: 50%; /* Move the pseudo-element to the right */
+}
+
+/* Styling for the div elements inside the toggle container */
+.toggleContainer div {
+    padding: 6px; /* Adding padding */
+    text-align: center; /* Centering text horizontally */
+    z-index: 1; /* Adding z-index */
+}
+
+/* Styling for the toggle checkbox */
+.toggleCheckbox {
+    display: none; /* Hiding the checkbox */
+}
+
+/*        When toggle is checked*/
+/* Styling for the first child div when toggle is checked */
+.toggleCheckbox:checked + .toggleContainer div:first-child{
+    color: white; /* Changing text color */
+    transition: color 0.3s; /* Adding transition */
+}
+
+/* Styling for the last child div when toggle is checked */
+.toggleCheckbox:checked + .toggleContainer div:last-child{
+    color: #343434; /* Changing text color */
+    transition: color 0.3s; /* Adding transition */
+}
+
+/*        When toggle is unchecked*/
+/* Styling for the first child div when toggle is not checked */
+.toggleCheckbox + .toggleContainer div:first-child{
+    color: #343434; /* Changing text color */
+    transition: color 0.3s; /* Adding transition */
+}
+
+/* Styling for the last child div when toggle is not checked */
+.toggleCheckbox + .toggleContainer div:last-child{
+    color: white; /* Changing text color */
+    transition: color 0.3s; /* Adding transition */
+}
+
+
+/*        TOGGLE FOR GAME.HTML*/
+.toggleContainerGame {
+    position: relative;
+    display: grid; /* Using CSS grid for layout */
+    grid-template-columns: repeat(2, 1fr); /* Creating two columns of equal width */
+    width: fit-content; /* Adjusting width to fit content */
+    border: 3px solid #343434; /* Adding border */
+    border-radius: 20px; /* Adding border radius */
+    background: #343434; /* Background color */
+    font-weight: bold; /* Bold text */
+    text-shadow: none; /* Removing text shadow */
+    color: #343434; /* Text color */
+    cursor: pointer; /* Changing cursor to pointer on hover */
+}
+/* Styling for the pseudo-element that represents the toggle switch */
+.toggleContainerGame::before {
+    content: ''; /* Adding content to pseudo-element */
+    position: absolute; /* Positioning the pseudo-element absolutely */
+    width: 50%; /* Setting initial width to 50% */
+    height: 100%; /* Setting height to match container */
+    left: 0%; /* Initial position */
+    border-radius:20px; /* Adding border radius */
+    background: #33add1; /* Background color */
+    transition: all 0.3s; /* Adding transition for smooth animation */
+}
+/* Styling for the toggle switch when checked */
+.toggleCheckbox:checked + .toggleContainerGame::before {
+    left: 50%; /* Move the pseudo-element to the right */
+}
+
+/* Styling for the div elements inside the toggle container */
+.toggleContainerGame div {
+    padding: 6px; /* Adding padding */
+    text-align: center; /* Centering text horizontally */
+    z-index: 1; /* Adding z-index */
+}
+
+/*        When toggle is checked*/
+/* Styling for the first child div when toggle is checked */
+.toggleCheckbox:checked + .toggleContainerGame div:first-child{
+    color: white; /* Changing text color */
+    transition: color 0.3s; /* Adding transition */
+}
+
+/* Styling for the last child div when toggle is checked */
+.toggleCheckbox:checked + .toggleContainerGame div:last-child{
+    color: #343434; /* Changing text color */
+    transition: color 0.3s; /* Adding transition */
+}
+
+/*        When toggle is unchecked*/
+/* Styling for the first child div when toggle is not checked */
+.toggleCheckbox + .toggleContainerGame div:first-child{
+    color: #343434; /* Changing text color */
+    transition: color 0.3s; /* Adding transition */
+}
+
+/* Styling for the last child div when toggle is not checked */
+.toggleCheckbox + .toggleContainerGame div:last-child{
+    color: white; /* Changing text color */
+    transition: color 0.3s; /* Adding transition */
+}
+
+
+input[type=text]{
+    background-color: black;
+    color: white;
+    border: none;
+    outline: none;
+    font-family: monospace;
+    font-size: 15px;
+}
+
+
+
+/*Choice button styling*/
 .choice-wrapper{
     display: flex;
     justify-content: center;
@@ -139,8 +307,6 @@ body {
     overflow: hidden;
     letter-spacing: .15em;
     white-space: pre-wrap;
-    animation: typing 3.5s steps(30, end), blink-caret .5s step-end infinite, textShadow;
-    animation-fill-mode: forwards;
 }
 
 @keyframes typing {

@@ -7,6 +7,8 @@
     <script src="script.js"></script>
 </head>
 <body>
+<input type="hidden" id="animationsEnabled" th:value="${animationsEnabled}" />
+
 <div class="container">
 
 <!--    Player stats-->
@@ -18,18 +20,11 @@
 
 <!--Title-->
     <h1 class="game-title">Tavern Tales</h1>
-        <p></p>
 
-    <div class="game-container"
+    <div class="game-container" th:if="${imagePath != null}"
          th:style="'background-image: url(' + ${imagePath} + ')'">
     </div>
 
-
-<!--&lt;!&ndash;Game text display area &ndash;&gt;-->
-<!--    <div class="game-container">-->
-<!--        &lt;!&ndash;Display image per scenario&ndash;&gt;-->
-<!--        <img class="scenario-image" th:if="${imagePath != null}" th:src="@{${imagePath}}" alt="Scenario Image">-->
-<!--    </div>-->
         <!--Text-display styling-->
         <div class="text-area">
             <!-- Displays Game Over text if player HP falls below 0-->
@@ -37,10 +32,19 @@
 
             <!--Where main game text will be displayed-->
             <div class="typewriter hidden" th:text="${mainTextArea}"></div>
-        </div>
+            <br>
 
-    <!--Choice button styling-->
-    <div class=".choice-wrapper">
+
+    <div class="user-input">
+        <form method="post" action="/choice">
+            ><input type="text" class="user-field" name="userInput" th:value="${userInput}" alt="Input action here"autocomplete="off">
+            <input type="hidden" name="choice" value="start">
+            <input type="submit" style="display: none;">
+        </form>
+    </div>
+
+<!--    Choice button styling-->
+    <div class="choice-wrapper">
         <div class="choice-container">
             <!--choice button code-->
             <div th:each="choice, choiceStat : ${choices}">
@@ -50,9 +54,10 @@
                     </button>
                 </form>
             </div>
-
         </div>
     </div>
+<!--            text area closing tag-->
+        </div>
 
 </div>
 
