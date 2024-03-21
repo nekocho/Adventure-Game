@@ -3,7 +3,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const textElements = document.querySelectorAll(".typewriter");
 
     // Initialize animationsEnabled variable based on the value obtained from the server
-    const animationsEnabled = document.getElementById("animationsEnabled").value === "true";
+    let animationsEnabled = document.getElementById("animationsEnabled").value === "true";
+    let speedUp = 1; // Variable to control speed factor
+    let spaceBarPressed = false; // Variable to track space bar state
 
     // Function to execute typewriter animation
     function typeWriter(textElement, text, i = 0) {
@@ -21,9 +23,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // Set the timeout based on the type of punctuation mark
             if (/[.,\/#!$%\^&\*;:{}=\_`~()?]/.test(currentChar)) {
-                timeout = currentChar === ',' ? 100 : 250; // Change speed for commas
+                timeout = currentChar === ',' ? 100 / speedUp : 250 / speedUp; // Change speed for commas
             } else {
-                timeout = 50; // Default typing speed for non-punctuation characters
+                timeout = 50 / speedUp; // Default typing speed for non-punctuation characters
             }
 
             // Schedule the next iteration of the typewriter effect after a delay
@@ -54,4 +56,22 @@ document.addEventListener("DOMContentLoaded", function() {
     if (animationsEnabled) {
         toggleAnimations();
     }
+
+    // Event listener for keydown event
+    document.addEventListener("keydown", function(event) {
+        // Check if the pressed key is the space bar
+        if (event.code === "Space") {
+            spaceBarPressed = true;
+            speedUp *= 2; // Double the speed factor
+        }
+    });
+
+    // Event listener for keyup event
+    document.addEventListener("keyup", function(event) {
+        // Check if the released key is the space bar
+        if (event.code === "Space") {
+            spaceBarPressed = false;
+            speedUp = 1; // Reset the speed factor
+        }
+    });
 });

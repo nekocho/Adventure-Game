@@ -32,7 +32,22 @@
 
             <!--Where main game text will be displayed-->
             <div class="typewriter hidden" th:text="${mainTextArea}"></div>
+            <br>
+
+
+    <div class="user-input">
+        <form method="post" action="/choice">
+            <input type="text" class="user-field" name="userInput" th:value="${userInput}" alt="Input action here">
+            <input type="hidden" name="choice" value="start">
+            <input type="submit" style="display: none;">
+        </form>
+    </div>
+
         </div>
+
+
+
+
 
     <!--Choice button styling-->
     <div class="choice-wrapper">

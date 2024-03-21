@@ -19,6 +19,10 @@ public class Story {
     // Get image name from resources/static/image directory
     private String imagePath;
 
+    // Display User input as a List
+
+    private String userInput;
+
     // Construct the Story with player stats and choices
     public Story(Player player) {
         this.player = player;
@@ -42,6 +46,12 @@ public class Story {
         this.imagePath = imagePath;
     }
 
+    public void setUserInput(String userInput) {
+        this.userInput = userInput;
+        handleUserInput(userInput);
+    }
+
+
     // GETTERS
 
     // Method to get the main text
@@ -59,7 +69,35 @@ public class Story {
         return imagePath;
     }
 
+    public String getUserInput() {
+        return userInput;
+    }
 
+
+
+
+    // Handle user input choices
+    public void handleUserInput(String userInput) {
+        if (userInput != null) {
+            // Tokenize the user input by splitting it into words
+            String[] words = userInput.toLowerCase().split("\\s+"); // Split by whitespace and convert to lowercase
+
+            // Check for keywords in the tokenized input
+            if (containsKeyword(words, "look") && containsKeyword(words, "around")) {
+                lookAroundOakridge();
+            } else if (containsKeyword(words, "talk") && containsKeyword(words, "baker")) {
+                talkToBaker();
+            } else if (containsKeyword(words, "attack") && containsKeyword(words, "baker")) {
+                attackBaker();
+            } else if (containsKeyword(words, "enter") && containsKeyword(words, "tavern")) {
+                enterTavern();
+            }
+            // Add more conditions for other scenarios as needed
+        }
+    }
+    private boolean containsKeyword(String[] words, String keyword) {
+        return Arrays.asList(words).contains(keyword);
+    }
 
 
 

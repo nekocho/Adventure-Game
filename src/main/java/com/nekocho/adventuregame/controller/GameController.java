@@ -23,12 +23,14 @@ public class GameController {
 
     @GetMapping("/start")
     public String handleStart(@RequestParam(name = "animationsEnabled", required = false) String animationsEnabled, Model model) {
+
         // Initialize the game and pass initial data to Thymeleaf
         story.selectPosition("enterOakridge"); // Start the story
         model.addAttribute("imagePath", story.getImagePath());
         model.addAttribute("mainTextArea", story.getMainText());
         model.addAttribute("choices", story.getCurrentChoices());
         model.addAttribute("player", player);
+        model.addAttribute("userInput", story.getUserInput());
 
         this.animationsEnabled = "on".equals(animationsEnabled);
 
@@ -42,9 +44,20 @@ public class GameController {
     }
 
     @PostMapping("/choice")
-    public String handleChoice(@RequestParam("choice") String choice, Model model) {
-        // Handle user choice and update the story
-        story.selectPosition(choice);
+    public String handleChoice(@RequestParam(name = "choice", required = false) String choice,
+                               @RequestParam(name = "userInput", required = false) String userInput,
+                               Model model) {
+        if (choice != null) {
+            // Handle user's choice
+            story.selectPosition(choice);
+        }
+        if (userInput != null) {
+            // Handle user input
+            story.setUserInput(userInput);
+        }
+
+        System.out.println(userInput);
+        System.out.println(story.getUserInput());
 
         // Update UI data based on story progression
         model.addAttribute("imagePath", story.getImagePath());
@@ -52,6 +65,8 @@ public class GameController {
         model.addAttribute("choices", story.getCurrentChoices());
         model.addAttribute("player", player);
         model.addAttribute("animationsEnabled", this.animationsEnabled);
+        model.addAttribute("userInput", story.getUserInput());
         return "game";
     }
+
 }
